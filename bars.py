@@ -25,8 +25,9 @@ def get_smallest_bar(data):
 
 
 def get_closest_bar(data, longitude, latitude):
-    ldata = [data['features'][i]['geometry']['coordinates'] for i in range(len(data['features']))]
-    dist = [(ldata[index][0] - longitude)**2 + (ldata[index][1] - latitude)**2 for index in range(len(ldata))]
+    coordinates = [data['features'][index]['geometry']['coordinates'] for index in range(len(data['features']))]
+    dist = [(coordinates[index][0] - longitude)**2 + (coordinates[index][1] - latitude)**2 
+            for index in range(len(coordinates))]
     index = dist.index(min(dist))
     return data['features'][index]['properties']['Attributes'].get('Name')
 
