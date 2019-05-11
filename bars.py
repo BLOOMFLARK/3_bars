@@ -7,29 +7,34 @@ def load_data(filepath):
 
 
 def get_biggest_bar(data):
-    list_of_seats = [data['features'][index]['properties']['Attributes']['SeatsCount'] for index in
-                     range(len(data['features']))]
+    list_of_features = data['features']
+    list_of_seats = [list_of_features[index]['properties']['Attributes']['SeatsCount'] for index in
+                     range(len(list_of_features))]
     max_seats = max(list_of_seats)
     index = list_of_seats.index(max_seats)
-
-    return data['features'][index]['properties']['Attributes'].get('Name')
+    name_of_bar = list_of_features[index]['properties']['Attributes'].get('Name')
+    return name_of_bar
 
 
 def get_smallest_bar(data):
-    list_of_seats = [data['features'][index]['properties']['Attributes']['SeatsCount'] for index in
-                     range(len(data['features']))]
+    list_of_features = data['features']
+    list_of_seats = [list_of_features[index]['properties']['Attributes']['SeatsCount'] for index in
+                     range(len(list_of_features))]
     min_seats = min(list_of_seats)
     index = list_of_seats.index(min_seats)
-
-    return data['features'][index]['properties']['Attributes'].get('Name')
+    name_of_bar = list_of_features[index]['properties']['Attributes'].get('Name')
+    return name_of_bar
 
 
 def get_closest_bar(data, longitude, latitude):
-    coordinates = [data['features'][index]['geometry']['coordinates'] for index in range(len(data['features']))]
-    dist = [(coordinates[index][0] - longitude)**2 + (coordinates[index][1] - latitude)**2 
+    list_of_features = data['features']
+    coordinates = [list_of_features['features'][index]['geometry']['coordinates']
+                   for index in range(len(list_of_features))]
+    distances = [(coordinates[index][0] - longitude)**2 + (coordinates[index][1] - latitude)**2 
             for index in range(len(coordinates))]
-    index = dist.index(min(dist))
-    return data['features'][index]['properties']['Attributes'].get('Name')
+    index = distances.index(min(dist))
+    name_of_bar = list_of_features[index]['properties']['Attributes'].get('Name')
+    return name_of_bar
 
 
 if __name__ == '__main__':
