@@ -40,8 +40,8 @@ def get_closest_bar(data, longitude, latitude):
 if __name__ == '__main__':
     bars_data = load_data("/Users/dns/Desktop/yandex/bars.json")
 
-    print(get_biggest_bar(data))
-    print(get_smallest_bar(data))
+    print(get_biggest_bar(bars_data))
+    print(get_smallest_bar(bars_data))
     longitude = float(input("longitude :"))
     latitude = float(input("latitude :"))
-    print(get_closest_bar(data, longitude, latitude))
+    print(get_closest_bar(bars_data, longitude, latitude))
