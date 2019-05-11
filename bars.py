@@ -7,7 +7,8 @@ def load_data(filepath):
 
 
 def get_biggest_bar(data):
-    list_of_seats = [data['features'][i]['properties']['Attributes']['SeatsCount'] for i in range(len(data['features']))]
+    list_of_seats = [data['features'][index]['properties']['Attributes']['SeatsCount'] for index in
+                     range(len(data['features']))]
     max_seats = max(list_of_seats)
     index = list_of_seats.index(max_seats)
 
@@ -15,7 +16,7 @@ def get_biggest_bar(data):
 
 
 def get_smallest_bar(data):
-    list_of_seats = [data['features'][i]['properties']['Attributes']['SeatsCount'] for i in
+    list_of_seats = [data['features'][index]['properties']['Attributes']['SeatsCount'] for index in
                      range(len(data['features']))]
     min_seats = min(list_of_seats)
     index = list_of_seats.index(min_seats)
@@ -25,13 +26,13 @@ def get_smallest_bar(data):
 
 def get_closest_bar(data, longitude, latitude):
     ldata = [data['features'][i]['geometry']['coordinates'] for i in range(len(data['features']))]
-    dist = [(ldata[i][0] - longitude)**2 + (ldata[i][1] - latitude)**2 for i in range(len(ldata))]
+    dist = [(ldata[index][0] - longitude)**2 + (ldata[index][1] - latitude)**2 for index in range(len(ldata))]
     index = dist.index(min(dist))
     return data['features'][index]['properties']['Attributes'].get('Name')
 
 
 if __name__ == '__main__':
-    data = load_data("/Users/dns/Desktop/yandex/bars.json")
+    bars_data = load_data("/Users/dns/Desktop/yandex/bars.json")
 
     print(get_biggest_bar(data))
     print(get_smallest_bar(data))
