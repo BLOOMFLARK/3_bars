@@ -6,8 +6,8 @@ def load_data(filepath):
         return json.load(file_handler)
 
 
-def get_biggest_bar(data):
-    list_of_features = data['features']
+def get_biggest_bar(json_data):
+    list_of_features = json_data['features']
     list_of_seats = [list_of_features[index]['properties']['Attributes']['SeatsCount'] for index in
                      range(len(list_of_features))]
     max_seats = max(list_of_seats)
@@ -16,8 +16,8 @@ def get_biggest_bar(data):
     return name_of_bar
 
 
-def get_smallest_bar(data):
-    list_of_features = data['features']
+def get_smallest_bar(json_data):
+    list_of_features = json_data['features']
     list_of_seats = [list_of_features[index]['properties']['Attributes']['SeatsCount'] for index in
                      range(len(list_of_features))]
     min_seats = min(list_of_seats)
@@ -26,8 +26,8 @@ def get_smallest_bar(data):
     return name_of_bar
 
 
-def get_closest_bar(data, longitude, latitude):
-    list_of_features = data['features']
+def get_closest_bar(json_data, longitude, latitude):
+    list_of_features = json_data['features']
     coordinates = [list_of_features['features'][index]['geometry']['coordinates']
                    for index in range(len(list_of_features))]
     distances = [(coordinates[index][0] - longitude)**2 + (coordinates[index][1] - latitude)**2 
